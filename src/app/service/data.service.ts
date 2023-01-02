@@ -12,6 +12,10 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
+  login() {
+    return this.http.get(this.url);
+  }
+
   getDaysInOneWeek(weekOffset: number) {
     return this.http.get<string[]>(this.url + "class/days_oneweek/" + weekOffset);
   }

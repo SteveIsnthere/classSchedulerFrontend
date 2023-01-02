@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
+import {DataService} from "../service/data.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   nickname: string = "";
   password: string = "";
 
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService: CookieService, private dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +30,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.cookieService.set("nickname", this.nickname);
     this.cookieService.set("password", this.password);
+    this.dataService.login().subscribe((data: any) => {
+      if (data == "You shall pass") {
+        alert("You shall pass");
+      } else {
+        alert("You shall not pass");
+      }
+    })
   }
 
 

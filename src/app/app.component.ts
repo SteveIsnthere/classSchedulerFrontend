@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllCourses();
-    this.getDaysInOneWeek(0);
-    this.getClassInOneWeek(0);
+    // this.getAllCourses();
+    // this.getDaysInOneWeek(0);
+    // this.getClassInOneWeek(0);
   }
 
 
