@@ -8,6 +8,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     req = req.clone({
       withCredentials: true,
     });
+    req.headers.set('Access-Control-Allow-Origin', '*');
+    req.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    req.headers.set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    req.headers.set('Access-Control-Allow-Credentials', 'true');
 
     return next.handle(req);
   }

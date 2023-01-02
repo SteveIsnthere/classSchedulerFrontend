@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {DataService} from "../service/data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   nickname: string = "";
   password: string = "";
 
-  constructor(private cookieService: CookieService, private dataService: DataService) {
+  constructor(private cookieService: CookieService, private dataService: DataService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -37,7 +38,10 @@ export class LoginComponent implements OnInit {
         alert("You shall not pass");
       }
     })
+    // this.navigateToDashboard();
   }
 
-
+  navigateToDashboard() {
+    this.router.navigate(["dashboard"]).then();
+  }
 }

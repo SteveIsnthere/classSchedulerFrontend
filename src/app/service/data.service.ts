@@ -13,7 +13,7 @@ export class DataService {
   }
 
   login() {
-    return this.http.get(this.url);
+    return this.http.get(this.url, {withCredentials: true});
   }
 
   getDaysInOneWeek(weekOffset: number) {

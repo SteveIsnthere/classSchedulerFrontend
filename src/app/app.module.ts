@@ -13,11 +13,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {RouterOutlet} from "@angular/router";
 
 import {httpInterceptorProviders} from './helpers/http.interceptor';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
