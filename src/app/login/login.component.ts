@@ -31,13 +31,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.cookieService.set("nickname", this.nickname);
     this.cookieService.set("password", this.password);
-    this.dataService.login().subscribe((data: any) => {
-      if (data == "You shall pass") {
-        alert("You shall pass");
-      } else {
-        alert("You shall not pass");
+    this.dataService.login().subscribe(
+      (response) => {
+        this.navigateToDashboard();
+      },
+      (error) => {
+        console.log(error.error);
       }
-    })
+    );
     // this.navigateToDashboard();
   }
 

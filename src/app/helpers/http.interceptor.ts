@@ -1,22 +1,40 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HTTP_INTERCEPTORS,
+  HttpHeaders
+} from '@angular/common/http';
+import {catchError, Observable, throwError} from 'rxjs';
+import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
 
 @Injectable()
-export class HttpRequestInterceptor implements HttpInterceptor {
+export class Auth implements HttpInterceptor {
+  constructor(private cookieService: CookieService, private router: Router) {
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
-      withCredentials: true,
+      headers: new HttpHeaders({
+        'nickname': this.cookieService.get("nickname"),
+        'password': this.cookieService.get("password")
+      })
     });
-    req.headers.set('Access-Control-Allow-Origin', '*');
-    req.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    req.headers.set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    req.headers.set('Access-Control-Allow-Credentials', 'true');
-
-    return next.handle(req);
+    console.log(req)
+    return next.handle(req).pipe(
+      catchError((err: any) => {
+        if (err.status === 401) {
+          this.router.navigate(["login"]).then();
+        }
+        return throwError(err);
+      })
+    );
   }
 }
 
 export const httpInterceptorProviders = [
-  {provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: Auth, multi: true},
 ];
