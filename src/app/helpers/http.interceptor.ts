@@ -5,7 +5,7 @@ import {
   HttpHandler,
   HttpRequest,
   HTTP_INTERCEPTORS,
-  HttpHeaders
+  HttpHeaders, HttpErrorResponse
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {CookieService} from "ngx-cookie-service";
@@ -23,13 +23,12 @@ export class Auth implements HttpInterceptor {
         'password': this.cookieService.get("password")
       })
     });
-    console.log(req)
     return next.handle(req).pipe(
-      catchError((err: any) => {
-        if (err.status === 401) {
-          this.router.navigate(["login"]).then();
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+
         }
-        return throwError(err);
+        return throwError(error);
       })
     );
   }

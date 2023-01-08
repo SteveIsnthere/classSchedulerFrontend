@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {DataService} from "../data/data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
+  constructor(public dataService: DataService, private router: Router) {
+  }
+
+  launchClassPlanner() {
+    this.router.navigate(["class-planner"]).then();
+  }
 
 }

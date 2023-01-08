@@ -3,11 +3,14 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {ClassPlannerComponent} from "./class-planner/class-planner.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: "class-planner", component: ClassPlannerComponent},
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({

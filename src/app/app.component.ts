@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Course} from "./models/Course";
-import {DataService} from "./service/data.service";
-import {Class} from "./models/Class";
+import {Course} from "./data/models/Course";
+import {DataService} from "./data/data.service";
+import {Class} from "./data/models/Class";
 
 @Component({
   selector: 'app-root',

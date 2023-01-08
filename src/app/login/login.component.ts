@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
-import {DataService} from "../service/data.service";
+import {DataService} from "../data/data.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,6 +12,10 @@ export class LoginComponent implements OnInit {
 
   nickname: string = "";
   password: string = "";
+
+  hidePassword: boolean = true;
+
+  wrongTries: number = 0;
 
   constructor(private cookieService: CookieService, private dataService: DataService, private router: Router) {
   }
@@ -36,10 +40,11 @@ export class LoginComponent implements OnInit {
         this.navigateToDashboard();
       },
       (error) => {
-        console.log(error.error);
+        this.wrongTries++;
+        this.hidePassword = false;
+        this.dataService.logout();
       }
     );
-    // this.navigateToDashboard();
   }
 
   navigateToDashboard() {

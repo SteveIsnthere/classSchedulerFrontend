@@ -10,16 +10,21 @@ import {FormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {AppRoutingModule} from './app-routing.module';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 import {httpInterceptorProviders} from './helpers/http.interceptor';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {ClassPlannerComponent} from './class-planner/class-planner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ClassPlannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatButtonModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    MatSlideToggleModule,
+    RouterLink,
+    RouterLinkActive,
+    MatCardModule,
+    DragDropModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

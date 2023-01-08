@@ -1,6 +1,7 @@
 import {Relation} from "./Relation";
 
 export interface Class {
+  _id: string;
   startTime: string;
   duration: number;
   finished: boolean;
