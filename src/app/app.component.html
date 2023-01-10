@@ -11,5 +11,12 @@
 <!--</div>-->
 
 <div class="content" role="main">
+  <mat-toolbar color="primary">
+    <span>My web app, no shit</span>
+    <div class="h-spacer"></div>
+    <div *ngIf="true">
+      <button (click)="dataService.logout()" mat-stroked-button>Log out</button>
+    </div>
+  </mat-toolbar>
   <router-outlet></router-outlet>
 </div>

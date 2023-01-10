@@ -18,6 +18,13 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {ClassPlannerComponent} from './class-planner/class-planner.component';
+import { ClassCellComponent } from './compoents/class-cell/class-cell.component';
+import { RelationCellComponent } from './compoents/relation-cell/relation-cell.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatTabsModule} from "@angular/material/tabs";
+import { MemberCellComponent } from './compoents/member-cell/member-cell.component';
+import { MemberPickerComponent } from './dashboard/member-picker/member-picker.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -25,6 +32,10 @@ import {ClassPlannerComponent} from './class-planner/class-planner.component';
     LoginComponent,
     DashboardComponent,
     ClassPlannerComponent,
+    ClassCellComponent,
+    RelationCellComponent,
+    MemberCellComponent,
+    MemberPickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +52,11 @@ import {ClassPlannerComponent} from './class-planner/class-planner.component';
     RouterLinkActive,
     MatCardModule,
     DragDropModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatRadioModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

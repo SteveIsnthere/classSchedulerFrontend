@@ -24,7 +24,7 @@ export class PlanningServiceService {
 
 
   constructor(private dataService: DataService) {
-    this.initDisplayData();
+    // this.initDisplayData();
     // dataService.getRelationsOfMember(this.member.nickname).subscribe(relations => {
     //   this.relations = relations;
     //   this.updateRelationsFulfillmentStatus()
@@ -36,7 +36,6 @@ export class PlanningServiceService {
     for (let i = 0; i < 7; i++) {
       this.displayData[i] = [];
     }
-    this.member = dummyTeacher;
     this.dataService.getClassInOnWeekForOneMember(this.weekOffset, this.member.nickname).subscribe(
       classes => {
         this.dataService.getDaysInOneWeek(this.weekOffset).subscribe(
@@ -63,6 +62,11 @@ export class PlanningServiceService {
       this.relations = relations;
       this.updateRelationsFulfillmentStatus()
     });
+  }
+
+  init(member: Member){
+    this.member = member;
+    this.initDisplayData();
   }
 
 
@@ -181,7 +185,6 @@ export class PlanningServiceService {
       if (newStartTime.getTime() != new Date(c.startTime).getTime()) {
         c.startTime = toISOStr(newStartTime);
         this.dataService.updateClass(c._id, c).subscribe();
-        console.log("class start time updated: " + c.info.courseName + " " + c.startTime);
       }
     }
   }

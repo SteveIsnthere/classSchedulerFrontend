@@ -1,0 +1,17 @@
+main{
+  padding: 10px;
+}
+
+#members-list{
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.example-card {
+  margin: 5px;
+}
+
+.selected-card{
+  background-color: #caffdc;
+}

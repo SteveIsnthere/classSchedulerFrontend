@@ -1,0 +1,13 @@
+main{
+  border-radius: 5px;
+}
+#settings-btn{
+
+  margin: 10px;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.5em;
+}

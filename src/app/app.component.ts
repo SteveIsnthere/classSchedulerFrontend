@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   daysOfWeek: string[] = []
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {

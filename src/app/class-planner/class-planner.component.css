@@ -1,9 +1,20 @@
 main{
-  width: 100vw;
+  width: 100%;
 }
+
+#relations{
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  align-items: center;
+  align-content: center;
+  margin:5px;
+}
+
 #main-calender {
   display: flex;
-  width: 100vw;
+  width: 100%;
+  margin-top: 15px;
 }
 
 #main-calender-body {
@@ -21,15 +32,15 @@ main{
   /*border-radius: 4px;*/
   overflow: hidden;
   display: block;
-  width: 10vw;
+  width: 11.4vw;
 }
 
 .col-header-cell {
-  background-color: #999999;
   display: flex;
+  background-color: #999999;
   justify-content: center;
   align-items: center;
-  height: 2em;
+  height: 1.7em;
   color: whitesmoke;
 }
 
@@ -45,12 +56,14 @@ main{
 }
 
 .class-cell {
-  background: #f5f5f5;
+  /*background: #f5f5f5;*/
   cursor: move;
+  font-size: medium;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(224, 255, 227, 0.8);
 }
 
 .drag-placeholder {
