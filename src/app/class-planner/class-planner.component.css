@@ -1,27 +1,43 @@
-#calenderContent {
+main{
+  width: 100vw;
+}
+#main-calender {
+  display: flex;
+  width: 100vw;
+}
+
+#main-calender-body {
   display: flex;
 }
 
-.example-list {
+#classes-to-add{
+  overflow-y: auto;
+}
+
+.list-of-display-elements {
   border: solid 1px #ccc;
   min-height: 60px;
   background: white;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   overflow: hidden;
   display: block;
-  width: 10%
+  width: 10vw;
+}
+
+.col-header-cell {
+  background-color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  color: whitesmoke;
 }
 
 .schedule-cell {
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   background: white;
-  font-size: 14px;
 }
 
 .blank-cell {
@@ -31,6 +47,10 @@
 .class-cell {
   background: #f5f5f5;
   cursor: move;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .drag-placeholder {
@@ -60,6 +80,6 @@
   border: none;
 }
 
-.example-list.cdk-drop-list-dragging .schedule-cell:not(.cdk-drag-placeholder) {
+.list-of-display-elements.cdk-drop-list-dragging .schedule-cell:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

@@ -13,7 +13,6 @@ export interface Member {
   about: string
   noteToAdmin: string
   courses: Course[]
-  plans: ClassPlan[]
   unableTimes: TimePeriod[]
   preferredTimes: TimePeriod[]
 }

@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Member} from "../data/models/Member";
 import {dummyTeacher} from "../data/models/dummyData";
 import {DataService} from "../data/data.service";
-import {Relation} from "../data/models/Relation";
 import {Class} from "../data/models/Class";
 import {DisplayElement, getBlankDisplayElement} from "./DisplayElement";
 import {toISOStr} from "../helpers/helperFunctions";
+import {Relation} from "../data/models/Relation";
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +14,14 @@ export class PlanningServiceService {
   member: Member = dummyTeacher;
   classes: Class[] = [];
   relations: Relation[] = [];
-  relationsToFulfill: number[] = [];
-  isDraggingClass: boolean = false;
-  previousIndex: number = -1;
+  relationsFulfillmentStatus: number[] = [];
+  classesToAdd: DisplayElement[] = [];
   openingTime = 11;
   closingTime = 20;
   weekOffset = 0;
   datesInWeek: Date[] = []
-
   displayData: DisplayElement[][] = [[], [], [], [], [], [], []];
 
-  displayDataCopy: DisplayElement[][] = [[], [], [], [], [], [], []];
 
   constructor(private dataService: DataService) {
     this.initDisplayData();
@@ -56,8 +53,16 @@ export class PlanningServiceService {
               }
             }
             this.addAllClassesToDisplayData();
+            this.initRelations();
           })
       });
+  }
+
+  initRelations() {
+    this.dataService.getRelationsOfMember(this.member.nickname).subscribe(relations => {
+      this.relations = relations;
+      this.updateRelationsFulfillmentStatus()
+    });
   }
 
 
@@ -68,7 +73,6 @@ export class PlanningServiceService {
     for (let newClass of classSortedByStartTime) {
       this.addClassToDisplayData(newClass);
     }
-    this.updateDisplayDataCopy();
   }
 
   addClassToDisplayData(newClass: Class) {
@@ -80,9 +84,12 @@ export class PlanningServiceService {
 
     let classStartHour = new Date(newClass.startTime).getHours() + new Date(newClass.startTime).getMinutes() / 60;
     // check if the class can be inserted
-    if (classStartHour < this.openingTime || classStartHour > this.closingTime || this.getDayBlankTimeRemaining(this.displayData[dayOfWeek]) < newClass.duration) {
-      console.log("class start time or duration is out of range, removed class: " + newClass.info.courseName + " " + newClass.startTime);
+    if (classStartHour < this.openingTime || classStartHour + newClass.duration > this.closingTime || this.getDayBlankTimeRemaining(this.displayData[dayOfWeek]) < newClass.duration) {
+      console.error("class start time or duration is out of range, removed class: " + newClass.info.courseName + " " + newClass.startTime);
       this.dataService.deleteClass(newClass._id).subscribe();
+      console.log(newClass.startTime);
+      console.log(new Date(newClass.startTime));
+      console.log(newClass);
     }
 
     let timeSupposedToPassBeforeClass = classStartHour - this.openingTime;
@@ -92,6 +99,10 @@ export class PlanningServiceService {
       timePassedBeforeClass += this.displayData[dayOfWeek][cursorPosition].duration;
       cursorPosition++;
     }
+    if (timePassedBeforeClass > this.closingTime-this.openingTime) {
+      console.error("class start time is out of range after 1st check, removed class: " + newClass.info.courseName + " " + newClass.startTime);
+      this.dataService.deleteClass(newClass._id).subscribe();
+    }
     //insert into the displayData
     let newDisplayElement = this.classToDisplayElement(newClass);
     this.displayData[dayOfWeek].splice(cursorPosition, 0, newDisplayElement);
@@ -100,7 +111,7 @@ export class PlanningServiceService {
     for (let i = 0; i < this.displayData[dayOfWeek].indexOf(newDisplayElement); i++) {
       timePassedBeforeClassAfterInsertion += this.displayData[dayOfWeek][i].duration;
     }
-    let actualClassStartTime = this.openingTime + timePassedBeforeClassAfterInsertion;
+    let actualClassStartTime = this.openingTime + timePassedBeforeClassAfterInsertion - 8;
     // update the start time of the class if it is not the same as the actual start time
     if (timePassedBeforeClassAfterInsertion != timeSupposedToPassBeforeClass) {
       let newTime = new Date(newClass.startTime)
@@ -144,28 +155,38 @@ export class PlanningServiceService {
     throw new Error("class not found");
   }
 
-  updateOneClassStartTime(changedDay: boolean, newDisplayElementsList: DisplayElement[], newIndex: number) {
-    let newClass = this.getClassByDisplayElement(newDisplayElementsList[newIndex]);
-    let timePassedBeforeClass = 0;
-    for (let i = 0; i < newIndex; i++) {
-      timePassedBeforeClass += newDisplayElementsList[i].duration;
+  updateClassesStartTimeInOneDay(newDisplayElementsList: DisplayElement[]) {
+    let timePrecision_Day = this.datesInWeek[this.displayData.indexOf(newDisplayElementsList)];
+
+    for (let i = 0; i < newDisplayElementsList.length; i++) {
+      let newDisplayElement = newDisplayElementsList[i];
+      if (newDisplayElement.isBlank) {
+        continue;
+      }
+      let c = this.getClassByDisplayElement(newDisplayElement);
+      let timePassedBeforeClass = 0;
+      for (let n = 0; n < i; n++) {
+        timePassedBeforeClass += newDisplayElementsList[n].duration;
+      }
+      // check if the time has changed
+      let newStartTime = new Date(c.startTime);
+      newStartTime = new Date(newStartTime.getTime());
+      // set newStartTime's year, month, date to the timePrecision_Day
+      newStartTime.setFullYear(timePrecision_Day.getFullYear());
+      newStartTime.setMonth(timePrecision_Day.getMonth());
+      newStartTime.setDate(timePrecision_Day.getDate());
+      // set newStartTime's hour and minute
+      newStartTime.setHours(this.openingTime + Math.floor(timePassedBeforeClass) - 8);
+      newStartTime.setMinutes((timePassedBeforeClass - Math.floor(timePassedBeforeClass)) * 60);
+      if (newStartTime.getTime() != new Date(c.startTime).getTime()) {
+        c.startTime = toISOStr(newStartTime);
+        this.dataService.updateClass(c._id, c).subscribe();
+        console.log("class start time updated: " + c.info.courseName + " " + c.startTime);
+      }
     }
-    let newStartTime = new Date(newClass.startTime);
-    newStartTime = new Date(newStartTime.getTime());
-    newStartTime.setHours(this.openingTime + Math.floor(timePassedBeforeClass) - 8);
-    newStartTime.setMinutes((timePassedBeforeClass - Math.floor(timePassedBeforeClass)) * 60);
-    if (changedDay) {
-      // if the day of the week of the class is changed, we need to update the start time of the class
-      let newWeekDayIndex = this.displayData.findIndex(d => d === newDisplayElementsList);
-      newStartTime.setDate(this.datesInWeek[newWeekDayIndex].getDate());
-      newStartTime.setMonth(this.datesInWeek[newWeekDayIndex].getMonth());
-    }
-    newClass.startTime = toISOStr(newStartTime)
-    this.dataService.updateClass(newClass._id, newClass).subscribe();
   }
 
-  insertBlankDisplayElementAfterClassMovedOut(displayElementsList: DisplayElement[], oldIndex: number, newIndex: number) {
-    let c = displayElementsList[newIndex];
+  insertBlankDisplayElementAfterClassMovedOut(displayElementsList: DisplayElement[], oldIndex: number, c: DisplayElement) {
     let numberOfHalfHours = c.duration * 2;
     while (numberOfHalfHours > 0) {
       displayElementsList.splice(oldIndex, 0, getBlankDisplayElement());
@@ -191,11 +212,6 @@ export class PlanningServiceService {
         if (displayElementsList[cursor].isBlank) {
           displayElementsList.splice(cursor, 1);
           numberOfHalfHours--;
-          for (let i = cursor; i < this.displayData.length; i++) {
-            if (!displayElementsList[i].isBlank) {
-              this.updateOneClassStartTime(false, displayElementsList, i);
-            }
-          }
         } else {
           cursor--;
         }
@@ -205,12 +221,68 @@ export class PlanningServiceService {
 
   changeClassPositionSameDay(displayElementsList: DisplayElement[], oldIndex: number, newIndex: number) {
     let c = displayElementsList[newIndex];
-    this.insertBlankDisplayElementAfterClassMovedOut(displayElementsList, oldIndex, newIndex);
-    newIndex = displayElementsList.indexOf(c);
-    this.removeBlankDisplayElementAfterClassMovedIn(displayElementsList, newIndex);
-    newIndex = displayElementsList.indexOf(c);
-    this.updateOneClassStartTime(false, displayElementsList, newIndex);
+    let needToUpdateOtherClasses = false;
+    if (newIndex < oldIndex) {
+      for (let i = oldIndex - 1; i > newIndex; i--) {
+        if (!displayElementsList[i].isBlank) {
+          needToUpdateOtherClasses = true;
+          break;
+        }
+      }
+    } else {
+      for (let i = oldIndex + 1; i < newIndex; i++) {
+        if (!displayElementsList[i].isBlank) {
+          needToUpdateOtherClasses = true;
+          break;
+        }
+      }
+    }
+    if (needToUpdateOtherClasses) {
+      this.insertBlankDisplayElementAfterClassMovedOut(displayElementsList, oldIndex, c);
+      newIndex = displayElementsList.indexOf(c);
+      this.removeBlankDisplayElementAfterClassMovedIn(displayElementsList, newIndex);
+    }
+    this.updateClassesStartTimeInOneDay(displayElementsList);
   }
+
+  changeClassPositionDifferentDay(oldDisplayElementsList: DisplayElement[], newDisplayElementsList: DisplayElement[], oldIndex: number, newIndex: number) {
+    let c = newDisplayElementsList[newIndex];
+    //work on the old day
+    this.insertBlankDisplayElementAfterClassMovedOut(oldDisplayElementsList, oldIndex, c);
+    this.updateClassesStartTimeInOneDay(oldDisplayElementsList);
+    //work on the new day
+    this.removeBlankDisplayElementAfterClassMovedIn(newDisplayElementsList, newIndex);
+    this.updateClassesStartTimeInOneDay(newDisplayElementsList);
+  }
+
+  // updatePreviewClassPositionSameDay(displayElementsList: DisplayElement[], newIndex: number) {
+  //   let oldIndex = this.classLastPosition[1];
+  //   let needToUpdateOtherClasses = false;
+  //   console.log("oldIndex: " + oldIndex + " newIndex: " + newIndex);
+  //   console.log(displayElementsList)
+  //   if (oldIndex > newIndex) {
+  //     for (let i = newIndex + 1; i <= oldIndex; i++) {
+  //       console.log(displayElementsList[i]);
+  //       if (!displayElementsList[i].isBlank) {
+  //         needToUpdateOtherClasses = true;
+  //         break;
+  //       }
+  //     }
+  //   } else {
+  //     for (let i = oldIndex; i <= newIndex - 1; i++) {
+  //       console.log(displayElementsList[i]);
+  //       if (!displayElementsList[i].isBlank) {
+  //         needToUpdateOtherClasses = true;
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   if (needToUpdateOtherClasses && !this.addedBlankElements) {
+  //     console.log("need to update other classes");
+  //     this.insertBlankDisplayElementAfterClassMovedOut(displayElementsList, oldIndex, newIndex);
+  //   }
+  //
+  // }
 
   //
   // createClassFromRelation(relation: Relation) {
@@ -226,34 +298,81 @@ export class PlanningServiceService {
   //   };
   // }
 
-  // updateRelationsFulfillmentStatus() {
-  //   // for each relation, there's an attribute called "classPerWeek" which means how many classes should be planned for this relation
-  //   // based on how many classes are planned for this relation, we can calculate how many classes are still needed to be planned
-  //   // store the result in integer array "relationsToFulfill" which has the same length as "relations"
-  //   for (let i = 0; i < this.relations.length; i++) {
-  //     let relation = this.relations[i];
-  //     let plannedClasses = this.classes.filter(c => c.info.courseName === relation.courseName && c.info.teacher === relation.teacher && c.info.student === relation.student);
-  //     this.relationsToFulfill[i] = relation.classPerWeek - plannedClasses.length;
-  //   }
-  // }
-
-  updateDisplayDataCopy() {
-    this.displayDataCopy = JSON.parse(JSON.stringify(this.displayData));
-    console.log(this.displayDataCopy);
+  updateRelationsFulfillmentStatus() {
+    for (let i = 0; i < this.relations.length; i++) {
+      let relation = this.relations[i];
+      let supposedClassPerWeek = relation.classPerWeek;
+      let plannedClasses = (this.classes.filter(c => c.info.courseName === relation.courseName));
+      for (let c of plannedClasses) {
+        // console.log(c);
+      }
+      this.relationsFulfillmentStatus[i] = supposedClassPerWeek - plannedClasses.length;
+    }
+    this.initClassesToAdd()
   }
 
-  savePreviousIndex(c: DisplayElement) {
-    console.log(c)
-    let dayIndex = 0;
-    for (let classOfaDay of this.displayDataCopy) {
-      let index = classOfaDay.findIndex(d => d._id === c._id);
-      if (index >= 0) {
-        this.previousIndex = index;
-        break;
+  initClassesToAdd() {
+    this.classesToAdd = [];
+    for (let i = 0; i < this.relations.length; i++) {
+      while (this.relationsFulfillmentStatus[i] > 0) {
+        this.classesToAdd.push(this.relationToDisplayElement(this.relations[i]));
+        this.relationsFulfillmentStatus[i]--;
       }
-      dayIndex++;
     }
-    console.log(dayIndex, this.previousIndex);
+  }
+
+  addClassFromRelation(displayElementsList: DisplayElement[], newIndex: number) {
+    this.removeBlankDisplayElementAfterClassMovedIn(displayElementsList, newIndex);
+    let c = displayElementsList[newIndex];
+
+    //get time past before the start of the class
+    let timePrecision_Day = this.datesInWeek[this.displayData.indexOf(displayElementsList)];
+    let hoursPast = 0;
+    for (let i = 0; i < newIndex; i++) {
+      hoursPast += displayElementsList[i].duration;
+    }
+    let timePrecision_Hour = Math.floor(hoursPast);
+    let timePrecision_Minute = Math.floor((hoursPast - timePrecision_Hour) * 60);
+
+    //get the time of the class
+    let time = new Date(timePrecision_Day);
+    time.setHours(timePrecision_Hour + this.openingTime - 8);
+    time.setMinutes(timePrecision_Minute);
+
+    let relation = this.relations.find(r => r.courseName === c.courseName);
+
+    if (!relation) {
+      console.error("relation not found");
+      return
+    }
+
+    let newClass = {
+      _id: Math.random().toString(36).substr(2, 9),
+      startTime: toISOStr(time),
+      duration: c.duration,
+      finished: false,
+      rating: 0,
+      comment: "",
+      isOnline: false,
+      info: relation
+    }
+
+    this.dataService.createClass(newClass).subscribe(
+      () => {
+        this.classes.push(newClass);
+      }
+    )
+  }
+
+  relationToDisplayElement(relation: Relation): DisplayElement {
+    let displayElement: DisplayElement = getBlankDisplayElement();
+    displayElement.isBlank = false;
+    displayElement._id = Math.random().toString(36).substr(2, 9);
+    displayElement.duration = relation.duration;
+    displayElement.teacher = relation.teacher;
+    displayElement.courseName = relation.courseName;
+    displayElement.student = relation.student;
+    return displayElement;
   }
 
   backwardOneWeek() {

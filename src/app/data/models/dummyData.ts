@@ -11,7 +11,6 @@ export let dummyStudent: Member = {
   about: "I am a student",
   noteToAdmin: "I am a student",
   courses: [],
-  plans: [],
   unableTimes: [],
   preferredTimes: []
 }
@@ -19,7 +18,7 @@ export let dummyStudent: Member = {
 export let dummyTeacher: Member = {
   _id: '2',
   name: "",
-  nickname: "Lorrainex912",
+  nickname: "test",
   email: "",
   phone: "123-456-7890",
   password: "password",
@@ -27,7 +26,6 @@ export let dummyTeacher: Member = {
   about: "I am a teacher",
   noteToAdmin: "I am a teacher",
   courses: [],
-  plans: [],
   unableTimes: [],
   preferredTimes: []
 }

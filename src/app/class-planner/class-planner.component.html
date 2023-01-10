@@ -1,34 +1,72 @@
-<main>
+<main *ngIf="planningService.datesInWeek.length>0">
   <div>
     <button mat-icon-button (click)="this.planningService.backwardOneWeek();">
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <span>{{planningService.weekOffset}}</span>
+    <span>{{getMonthAndYear()}}</span>
     <button mat-icon-button (click)="this.planningService.forwardOneWeek();">
       <mat-icon>arrow_forward_ios</mat-icon>
     </button>
   </div>
-  <span *ngFor="let d of planningService.datesInWeek">{{d.getDate()}}</span>
-  <div id="calenderContent" cdkDropListGroup>
-    <div cdkDropList class="example-list" *ngFor="let dayOfData of displayElements"
-         (cdkDropListDropped)="onDrop($event)"
-         (cdkDropListSorted)="onDragStartedSameCol($event)"
-         (cdkDropListEntered)="onDragStartedCrossCol($event)"
-         [cdkDropListData]="dayOfData">
-      <ng-container *ngFor="let data of dayOfData">
-        <!--Blank-->
-        <div *ngIf="data.isBlank; else classBlock" class="schedule-cell blank-cell" [cdkDragDisabled]="true"
-             [ngStyle]="{'height': cellHeight*data.duration + 'px'}" cdkDrag>
-              <!--<div class="drag-placeholder" *cdkDragPlaceholder></div>-->
+
+  <div id='main-calender' cdkDropListGroup>
+    <!--To add list-->
+    <div>
+      <div class="col-header-cell">To Add</div>
+    <div id="classes-to-add" cdkDropList class="list-of-display-elements"
+         (cdkDropListExited)="draggingFromRelation = true"
+         [cdkDropListData]="planningService.classesToAdd"
+         [ngStyle]="{'height': getTotalHeight()}">
+
+      <ng-container *ngFor="let c of planningService.classesToAdd">
+        <div class="schedule-cell class-cell" cdkDrag [ngStyle]="{'height': cellHeight*c.duration + 'px'}">
+          <div>{{c.courseName}}</div>
         </div>
-        <ng-template #classBlock>
-          <div class="schedule-cell class-cell" cdkDrag [ngStyle]="{'height': cellHeight*data.duration + 'px'}">
-            <div>
-              <p>{{data.courseName}}</p>
-            </div>
-          </div>
-        </ng-template>
       </ng-container>
+    </div>
+  </div>
+    <div style="width: 5vw"></div>
+
+    <!--hours marking-->
+    <div class="list-of-display-elements" style="width: 18px; border: none">
+      <div class="col-header-cell" style="background-color: transparent"></div>
+      <div *ngFor="let hour of hours" class="schedule-cell" [ngStyle]="{'height': cellHeight + 'px'}"
+           style="background-color: transparent; position: relative; border: none">
+        <div
+          style="position: absolute;top: -9px;">
+          {{hour}}
+        </div>
+      </div>
+    </div>
+
+    <div id="main-calender-body">
+      <div cdkDropList class="list-of-display-elements" *ngFor="let dayOfData of displayElements; let i = index"
+           (cdkDropListDropped)="onDrop($event)"
+           (cdkDropListSorted)="onDragStartedSameCol($event)"
+           (cdkDropListEntered)="onDragStartedCrossCol($event)"
+           [cdkDropListData]="dayOfData">
+        <div class="col-header-cell">
+          {{dateHeader(i)}}
+        </div>
+        <ng-container *ngFor="let data of dayOfData">
+          <!--Blank-->
+          <div *ngIf="data.isBlank; else classBlock" class="schedule-cell blank-cell" [cdkDragDisabled]="true"
+               [ngStyle]="{'height': cellHeight*data.duration + 'px'}" cdkDrag>
+            <!--<div class="drag-placeholder" *cdkDragPlaceholder></div>-->
+          </div>
+          <ng-template #classBlock>
+            <div class="schedule-cell class-cell" cdkDrag [ngStyle]="{'height': cellHeight*data.duration + 'px'}">
+              <div>
+                <p>{{data.courseName}}</p>
+                <p *ngIf="planningService.member.isTeacher; else studentBlock">{{data.student}}</p>
+                <ng-template #studentBlock>
+                  <p>{{data.teacher}}</p>
+                </ng-template>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
     </div>
   </div>
 </main>
