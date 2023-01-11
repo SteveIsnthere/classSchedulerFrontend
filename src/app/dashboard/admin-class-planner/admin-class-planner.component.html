@@ -1,0 +1,4 @@
+<main>
+  <app-member-picker (memberSelected)="selectMember($event)"></app-member-picker>
+  <app-class-planner *ngIf="memberSelected()"></app-class-planner>
+</main>

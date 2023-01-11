@@ -2,9 +2,9 @@
   <mat-card-title style="font-size: medium">{{data.courseName}}</mat-card-title><br>
   <mat-card-subtitle *ngIf="this.isTeacher; else studentBlock">{{data.student}}</mat-card-subtitle>
   <ng-template #studentBlock>
-    <p>{{data.teacher}}</p>
+    <mat-card-subtitle>{{data.teacher}}</mat-card-subtitle>
   </ng-template>
-  <button mat-icon-button id="settings-btn">
-    <mat-icon>settings</mat-icon>
-  </button>
+<!--  <button mat-icon-button id="settings-btn">-->
+<!--    <mat-icon>settings</mat-icon>-->
+<!--  </button>-->
 </main>

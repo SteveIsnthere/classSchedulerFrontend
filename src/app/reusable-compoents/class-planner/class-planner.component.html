@@ -12,12 +12,12 @@
     </div>
   </div>
 
-  <div style="margin-left: 14vw">
-    <button mat-flat-button (click)="this.planningService.backwardOneWeek();">
+  <div id="date-time-selector">
+    <button mat-flat-button color="primary" (click)="this.planningService.backwardOneWeek();">
       Prev
     </button>
-    <span>{{getMonthAndYear()}}</span>
-    <button mat-flat-button (click)="this.planningService.forwardOneWeek();">
+    <mat-card-title>{{getMonthAndYear()}}</mat-card-title>
+    <button mat-flat-button color="primary" (click)="this.planningService.forwardOneWeek();">
       Next
     </button>
   </div>
@@ -28,7 +28,7 @@
     <!--To add list-->
     <div>
       <div class="col-header-cell" style="background-color: transparent;color: black">
-        <h3>Courses to add</h3>
+        <mat-card-subtitle>Courses to add</mat-card-subtitle>
       </div>
       <div id="classes-to-add" cdkDropList class="list-of-display-elements"
            (cdkDropListExited)="draggingFromRelation = true"
@@ -63,7 +63,7 @@
            (cdkDropListSorted)="onDragStartedSameCol($event)"
            (cdkDropListEntered)="onDragStartedCrossCol($event)"
            [cdkDropListData]="dayOfData">
-        <div color="primary" class="col-header-cell">
+        <div class="col-header-cell">
           {{dateHeader(i)}}
         </div>
         <ng-container *ngFor="let data of dayOfData">

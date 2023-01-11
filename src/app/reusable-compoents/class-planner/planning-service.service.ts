@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Member} from "../data/models/Member";
-import {dummyTeacher} from "../data/models/dummyData";
-import {DataService} from "../data/data.service";
-import {Class} from "../data/models/Class";
+import {Member} from "../../data/models/Member";
+import {dummyTeacher} from "../../data/models/dummyData";
+import {DataService} from "../../data/data.service";
+import {Class} from "../../data/models/Class";
 import {DisplayElement, getBlankDisplayElement} from "./DisplayElement";
-import {toISOStr} from "../helpers/helperFunctions";
-import {Relation} from "../data/models/Relation";
+import {toISOStr} from "../../helpers/helperFunctions";
+import {Relation} from "../../data/models/Relation";
 
 @Injectable({
   providedIn: 'root'

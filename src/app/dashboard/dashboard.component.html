@@ -5,15 +5,14 @@
         <mat-icon class="example-tab-icon">edit_calendar</mat-icon>
         Class Planning
       </ng-template>
-      <app-member-picker (memberSelected)="selectMember($event)"></app-member-picker>
-      <app-class-planner *ngIf="memberSelected()"></app-class-planner>
+      <app-admin-class-planner></app-admin-class-planner>
     </mat-tab>
     <mat-tab label="Messages">
       <ng-template mat-tab-label>
         <mat-icon class="example-tab-icon">mail</mat-icon>
-        <app-messages></app-messages>
+        Messages
       </ng-template>
-      Content 2
+      <app-messages></app-messages>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>

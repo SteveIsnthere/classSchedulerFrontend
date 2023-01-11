@@ -5,6 +5,14 @@ main{
 #members-list{
   display: flex;
   flex-direction: row;
+
+}
+.not-selected{
+  flex-wrap: wrap;
+}
+
+.selected{
+  flex-wrap: nowrap;
   overflow-x: auto;
 }
 

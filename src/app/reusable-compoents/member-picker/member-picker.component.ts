@@ -31,7 +31,16 @@ export class MemberPickerComponent {
     this.displayingMembers = this.displayTeachers ? this.members.filter(member => member.isTeacher) : this.members.filter(member => !member.isTeacher);
   }
 
+  isMemberSelected() {
+    return this.selectedMember !== dummyTeacher;
+  }
+
   selectMember(member: Member) {
+    if (!this.isMemberSelected()){
+      //put member at the top of the list
+      this.displayingMembers = this.displayingMembers.filter(m => m!== member);
+      this.displayingMembers.unshift(member);
+    }
     this.selectedMember = member;
     this.memberSelected.emit(member);
   }

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {DisplayElement, getBlankDisplayElement} from "../../class-planner/DisplayElement";
+import {DisplayElement, getBlankDisplayElement} from "../class-planner/DisplayElement";
 
 @Component({
   selector: 'app-class-cell',
@@ -9,5 +9,4 @@ import {DisplayElement, getBlankDisplayElement} from "../../class-planner/Displa
 export class ClassCellComponent {
   @Input() data: DisplayElement = getBlankDisplayElement();
   @Input() isTeacher: boolean = true;
-
 }

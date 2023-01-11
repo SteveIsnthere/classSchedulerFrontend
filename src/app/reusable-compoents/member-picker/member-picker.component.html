@@ -1,11 +1,16 @@
 <main>
   <div style="display: flex; justify-content: center; margin-bottom: 15px">
-  <button mat-raised-button *ngIf="!displayTeachers" color="primary" (click)="toggleShowingTeachers()">Showing
-    Students
-  </button>
-  <button mat-raised-button *ngIf="displayTeachers" color="primary" (click)="toggleShowingTeachers()">Showing Teachers</button>
+    <button mat-raised-button *ngIf="!displayTeachers" color="primary" (click)="toggleShowingTeachers()">Showing
+      Students
+    </button>
+    <button mat-raised-button *ngIf="displayTeachers" color="primary" (click)="toggleShowingTeachers()">Showing
+      Teachers
+    </button>
   </div>
-  <div id="members-list">
+  <div id="members-list"
+       [ngClass]="{
+       'not-selected':!isMemberSelected(),
+       'selected':isMemberSelected()}">
     <ng-container *ngFor="let member of displayingMembers">
       <mat-card class="example-card" [ngClass]="{'selected-card' : member === selectedMember}"
                 (click)="selectMember(member)">

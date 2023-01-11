@@ -3,8 +3,6 @@ import {Component, Input} from '@angular/core';
 import {CdkDragDrop, CdkDragEnter, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {PlanningServiceService} from "./planning-service.service";
 import {DisplayElement} from "./DisplayElement";
-import {Member} from "../data/models/Member";
-import {dummyTeacher} from "../data/models/dummyData";
 
 @Component({
   selector: 'app-class-planner',
@@ -12,7 +10,6 @@ import {dummyTeacher} from "../data/models/dummyData";
   styleUrls: ['./class-planner.component.css']
 })
 export class ClassPlannerComponent {
-  @Input() member : Member = dummyTeacher;
   isTeacher: boolean = true;
   displayElements: DisplayElement[][]
   hours: number[] = []

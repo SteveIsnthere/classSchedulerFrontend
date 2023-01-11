@@ -26,7 +26,8 @@ export class Auth implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-
+          this.router.navigate(["login"]).then();
+          console.error("Unauthorized");
         }
         return throwError(error);
       })

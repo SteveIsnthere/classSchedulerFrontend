@@ -14,9 +14,14 @@
   <mat-toolbar color="primary">
     <span>My web app, no shit</span>
     <div class="h-spacer"></div>
-    <div *ngIf="true">
-      <button (click)="dataService.logout()" mat-stroked-button>Log out</button>
-    </div>
+    <ng-container *ngIf="authService.isLoggedIn()">
+      <span>{{authService.self?.nickname}}</span>
+      <div style="width: 0.2em"></div>
+      <mat-icon *ngIf="authService.self?.isTeacher" fontIcon="settings_accessibility"></mat-icon>
+      <mat-icon *ngIf="!authService.self?.isTeacher" fontIcon="boy"></mat-icon>
+      <div style="width: 1em"></div>
+      <button (click)="authService.logout()" mat-stroked-button>Log out</button>
+    </ng-container>
   </mat-toolbar>
   <router-outlet></router-outlet>
 </div>

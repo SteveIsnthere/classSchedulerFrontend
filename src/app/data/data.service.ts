@@ -17,14 +17,6 @@ export class DataService {
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
   }
 
-  login() {
-    return this.http.get(this.url, {withCredentials: true});
-  }
-
-  logout() {
-    this.cookieService.deleteAll();
-    this.router.navigate(["login"]).then();
-  }
 
   createClass(c: Class) {
     return this.http.post(this.url + "class/", c);

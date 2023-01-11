@@ -17,15 +17,16 @@ import {httpInterceptorProviders} from './helpers/http.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
-import {ClassPlannerComponent} from './class-planner/class-planner.component';
+import {ClassPlannerComponent} from './reusable-compoents/class-planner/class-planner.component';
 import { ClassCellComponent } from './reusable-compoents/class-cell/class-cell.component';
 import { RelationCellComponent } from './reusable-compoents/relation-cell/relation-cell.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTabsModule} from "@angular/material/tabs";
 import { MemberCellComponent } from './reusable-compoents/member-cell/member-cell.component';
-import { MemberPickerComponent } from './dashboard/member-picker/member-picker.component';
+import { MemberPickerComponent } from './reusable-compoents/member-picker/member-picker.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { MessagesComponent } from './messages/messages.component';
+import { AdminClassPlannerComponent } from './dashboard/admin-class-planner/admin-class-planner.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MessagesComponent } from './messages/messages.component';
     MemberCellComponent,
     MemberPickerComponent,
     MessagesComponent,
+    AdminClassPlannerComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,8 +25,17 @@ main{
   overflow-y: auto;
 }
 
+#date-time-selector{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  margin: 25px;
+}
+
 .list-of-display-elements {
-  border: solid 1px #ccc;
+  border: solid 1px #bbb;
   min-height: 60px;
   background: white;
   /*border-radius: 4px;*/
@@ -37,7 +46,7 @@ main{
 
 .col-header-cell {
   display: flex;
-  background-color: #999999;
+  background-color: grey;
   justify-content: center;
   align-items: center;
   height: 1.7em;
@@ -63,8 +72,9 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(224, 255, 227, 0.8);
+  background-color: #caffdc;
 }
+
 
 .drag-placeholder {
   background: #ccc;
