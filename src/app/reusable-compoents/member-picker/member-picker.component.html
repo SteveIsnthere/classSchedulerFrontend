@@ -1,5 +1,5 @@
 <main>
-  <div style="display: flex; justify-content: center; margin-bottom: 15px">
+  <div id="options-bar">
     <button mat-raised-button *ngIf="!displayTeachers" color="primary" (click)="toggleShowingTeachers()">Showing
       Students
     </button>
@@ -19,14 +19,9 @@
           <mat-card-subtitle>{{member.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <span></span><br>
+          <span></span>
+          <mat-divider></mat-divider>
         </mat-card-content>
-        <mat-card-actions>
-          <div style="display: flex; justify-content: space-evenly; width: 100%">
-            <button mat-button>Info</button>
-            <button mat-button>Settings</button>
-          </div>
-        </mat-card-actions>
       </mat-card>
     </ng-container>
   </div>

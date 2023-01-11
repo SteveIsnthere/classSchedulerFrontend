@@ -27,6 +27,7 @@ import { MemberPickerComponent } from './reusable-compoents/member-picker/member
 import {MatRadioModule} from "@angular/material/radio";
 import { MessagesComponent } from './messages/messages.component';
 import { AdminClassPlannerComponent } from './dashboard/admin-class-planner/admin-class-planner.component';
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AdminClassPlannerComponent } from './dashboard/admin-class-planner/admi
     MatToolbarModule,
     MatTabsModule,
     MatRadioModule,
+    MatDividerModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
