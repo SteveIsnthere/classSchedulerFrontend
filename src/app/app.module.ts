@@ -18,13 +18,14 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {ClassPlannerComponent} from './class-planner/class-planner.component';
-import { ClassCellComponent } from './compoents/class-cell/class-cell.component';
-import { RelationCellComponent } from './compoents/relation-cell/relation-cell.component';
+import { ClassCellComponent } from './reusable-compoents/class-cell/class-cell.component';
+import { RelationCellComponent } from './reusable-compoents/relation-cell/relation-cell.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTabsModule} from "@angular/material/tabs";
-import { MemberCellComponent } from './compoents/member-cell/member-cell.component';
+import { MemberCellComponent } from './reusable-compoents/member-cell/member-cell.component';
 import { MemberPickerComponent } from './dashboard/member-picker/member-picker.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatRadioModule} from "@angular/material/radio";
     RelationCellComponent,
     MemberCellComponent,
     MemberPickerComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
