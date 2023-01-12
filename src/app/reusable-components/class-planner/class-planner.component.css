@@ -1,5 +1,9 @@
 main{
-  width: 100%;
+  margin:10px;
+}
+
+#main-card{
+  padding: 10px 0;
 }
 
 #relations{
@@ -7,7 +11,6 @@ main{
   flex-direction: row;
   overflow-x: auto;
   align-items: center;
-  align-content: center;
   margin:5px;
 }
 
@@ -19,6 +22,7 @@ main{
 
 #main-calender-body {
   display: flex;
+  overflow: auto;
 }
 
 #classes-to-add{
@@ -42,6 +46,7 @@ main{
   overflow: hidden;
   display: block;
   width: 11.4vw;
+  min-width: 150px;
 }
 
 .col-header-cell {

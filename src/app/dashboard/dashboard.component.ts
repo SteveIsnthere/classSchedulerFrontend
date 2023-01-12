@@ -3,7 +3,7 @@ import {DataService} from "../data/data.service";
 import {Router} from "@angular/router";
 import {Member} from "../data/models/Member";
 import {dummyTeacher} from "../data/models/dummyData";
-import {PlanningServiceService} from "../reusable-compoents/class-planner/planning-service.service";
+import {PlanningServiceService} from "../reusable-components/class-planner/planning-service.service";
 
 @Component({
   selector: 'app-dashboard',

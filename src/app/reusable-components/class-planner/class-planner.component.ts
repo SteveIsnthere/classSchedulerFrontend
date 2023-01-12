@@ -10,14 +10,12 @@ import {DisplayElement} from "./DisplayElement";
   styleUrls: ['./class-planner.component.css']
 })
 export class ClassPlannerComponent {
-  isTeacher: boolean = true;
   displayElements: DisplayElement[][]
   hours: number[] = []
   cellHeight: number = 80;
   draggingFromRelation: boolean = false;
   constructor(public planningService: PlanningServiceService) {
     this.displayElements = this.planningService.displayData;
-    this.isTeacher = this.planningService.member.isTeacher;
     for (let h = this.planningService.openingTime; h < this.planningService.closingTime; h++) {
       this.hours.push(h);
     }

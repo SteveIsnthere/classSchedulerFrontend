@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Member} from "../../data/models/Member";
-import {PlanningServiceService} from "../../reusable-compoents/class-planner/planning-service.service";
+import {PlanningServiceService} from "../../reusable-components/class-planner/planning-service.service";
 
 @Component({
   selector: 'app-admin-class-planner',
@@ -15,6 +15,7 @@ export class AdminClassPlannerComponent {
 
   selectMember(member: Member) {
     this.selectedMember = member;
+    this.planningService.readyToDisplay = false;
     this.planningService.init(member);
   }
 

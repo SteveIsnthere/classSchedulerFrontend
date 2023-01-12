@@ -3,9 +3,12 @@ main{
 }
 #options-bar{
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin: 10px;
 }
 
@@ -14,6 +17,7 @@ main{
 }
 #members-list{
   display: flex;
+  gap: 5px;
   flex-direction: row;
 }
 .not-selected{
@@ -26,9 +30,14 @@ main{
 }
 
 .example-card {
-  margin: 5px;
+  margin: 15px 5px 2px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgba(64,80,181,0.55);
 }
 
 .selected-card{
+  color: black;
   background-color: #caffdc;
 }

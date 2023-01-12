@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   self: Member | null = null;
+  isAdmin: boolean = false;
   url: string;
   wrongTries: number = 0;
 
@@ -24,6 +25,7 @@ export class AuthService {
     this.http.get(this.url + "member/" + this.cookieService.get("nickname"), {withCredentials: true}).subscribe(
       (response) => {
         this.self = response as Member;
+        this.wrongTries = 0;
         this.router.navigate(["dashboard"]).then();
       },
       (error) => {

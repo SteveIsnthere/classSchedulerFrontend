@@ -17,17 +17,28 @@ import {httpInterceptorProviders} from './helpers/http.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
-import {ClassPlannerComponent} from './reusable-compoents/class-planner/class-planner.component';
-import { ClassCellComponent } from './reusable-compoents/class-cell/class-cell.component';
-import { RelationCellComponent } from './reusable-compoents/relation-cell/relation-cell.component';
+import {ClassPlannerComponent} from './reusable-components/class-planner/class-planner.component';
+import {ClassCellComponent} from './reusable-components/class-cell/class-cell.component';
+import {RelationCellComponent} from './reusable-components/relation-cell/relation-cell.component';
+import {
+  RelationBottomSheetComponent
+} from './reusable-components/relation-cell/relation-bottom-sheet/relation-bottom-sheet.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTabsModule} from "@angular/material/tabs";
-import { MemberCellComponent } from './reusable-compoents/member-cell/member-cell.component';
-import { MemberPickerComponent } from './reusable-compoents/member-picker/member-picker.component';
+import {MemberCellComponent} from './reusable-components/member-cell/member-cell.component';
+import {MemberPickerComponent} from './reusable-components/member-picker/member-picker.component';
 import {MatRadioModule} from "@angular/material/radio";
-import { MessagesComponent } from './messages/messages.component';
-import { AdminClassPlannerComponent } from './dashboard/admin-class-planner/admin-class-planner.component';
+import {MessagesComponent} from './messages/messages.component';
+import {AdminClassPlannerComponent} from './dashboard/admin-class-planner/admin-class-planner.component';
 import {MatDividerModule} from "@angular/material/divider";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatListModule} from "@angular/material/list";
+import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
+import {
+  ClassBottomSheetComponent
+} from './reusable-components/class-cell/class-bottom-sheet/class-bottom-sheet.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +52,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MemberPickerComponent,
     MessagesComponent,
     AdminClassPlannerComponent,
+    RelationBottomSheetComponent,
+    ClassBottomSheetComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +74,14 @@ import {MatDividerModule} from "@angular/material/divider";
     MatTabsModule,
     MatRadioModule,
     MatDividerModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatProgressBarModule,
+    MatListModule,
+    MatBottomSheetModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

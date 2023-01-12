@@ -1,0 +1,13 @@
+<main>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{relation.courseName}}</mat-card-title>
+      <mat-card-subtitle>{{relation.teacher + relation.student}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <span>Duration: {{relation.duration}}hr</span><br>
+      <span>{{relation.classPerWeek}} classes per week</span>
+    </mat-card-content>
+  </mat-card>
+</main>

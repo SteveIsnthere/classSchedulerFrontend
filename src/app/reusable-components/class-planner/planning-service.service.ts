@@ -22,6 +22,8 @@ export class PlanningServiceService {
   datesInWeek: Date[] = []
   displayData: DisplayElement[][] = [[], [], [], [], [], [], []];
 
+  readyToDisplay = false;
+
 
   constructor(private dataService: DataService) {
     // this.initDisplayData();
@@ -53,6 +55,7 @@ export class PlanningServiceService {
             }
             this.addAllClassesToDisplayData();
             this.initRelations();
+            this.readyToDisplay = true;
           })
       });
   }

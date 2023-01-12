@@ -11,6 +11,7 @@ import {dummyTeacher} from "../../data/models/dummyData";
 export class MemberPickerComponent {
   @Output() memberSelected = new EventEmitter<Member>();
   members: Member[] = [];
+  markedMembersNames: string[] = [];
 
   displayingMembers: Member[] = [];
 
@@ -36,13 +37,29 @@ export class MemberPickerComponent {
   }
 
   selectMember(member: Member) {
-    if (!this.isMemberSelected()){
+    if (!this.isMemberSelected()) {
       //put member at the top of the list
-      this.displayingMembers = this.displayingMembers.filter(m => m!== member);
+      this.displayingMembers = this.displayingMembers.filter(m => m !== member);
       this.displayingMembers.unshift(member);
     }
     this.selectedMember = member;
     this.memberSelected.emit(member);
+  }
+
+  isMemberMarked(member: Member) {
+    return this.markedMembersNames.includes(member.nickname);
+  }
+  markMember(member: Member) {
+    this.markedMembersNames.push(member.nickname);
+  }
+  unmarkMember(member: Member) {
+    this.markedMembersNames = this.markedMembersNames.filter(name => name !== member.nickname);
+  }
+  markAllMembers() {
+    this.markedMembersNames = this.displayingMembers.map(member => member.nickname);
+  }
+  unmarkAllMembers() {
+    this.markedMembersNames = [];
   }
 
 }

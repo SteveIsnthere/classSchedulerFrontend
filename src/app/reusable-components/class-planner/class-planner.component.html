@@ -1,0 +1,89 @@
+<main>
+  <mat-card id="main-card" *ngIf="this.planningService.readyToDisplay">
+    <!--relations-->
+    <div>
+      <mat-card-title style="margin-left: 10px">{{"Relations of " + planningService.member.nickname}}</mat-card-title>
+      <div id="relations">
+        <app-relation-cell *ngFor="let relation of this.planningService.relations"
+                           [relation]="relation" [isTeacher]=this.planningService.member.isTeacher></app-relation-cell>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div id="date-time-selector">
+      <button mat-flat-button color="primary" (click)="this.planningService.backwardOneWeek();">
+        Prev
+      </button>
+      <mat-card-title>{{getMonthAndYear()}}</mat-card-title>
+      <button mat-flat-button color="primary" (click)="this.planningService.forwardOneWeek();">
+        Next
+      </button>
+    </div>
+
+
+    <div id='main-calender' cdkDropListGroup>
+      <div class="h-spacer"></div>
+      <!--To add list-->
+      <div>
+        <div class="col-header-cell" style="background-color: transparent;color: black">
+          <mat-card-subtitle>Courses to add</mat-card-subtitle>
+        </div>
+        <div id="classes-to-add" cdkDropList class="list-of-display-elements"
+             (cdkDropListExited)="draggingFromRelation = true"
+             [cdkDropListData]="planningService.classesToAdd"
+             [ngStyle]="{'height': getTotalHeight()}">
+
+          <ng-container *ngFor="let c of planningService.classesToAdd">
+            <app-class-cell class="schedule-cell class-cell" cdkDrag
+                            [ngStyle]="{'height': cellHeight*c.duration + 'px'}" [data]="c"
+                            [isTeacher]=this.planningService.member.isTeacher></app-class-cell>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="h-spacer"></div>
+
+      <!--hours marking-->
+      <div class="list-of-display-elements" style="width: 18px; border: none; min-width: 15px;">
+        <div class="col-header-cell" style="background-color: transparent"></div>
+        <div *ngFor="let hour of hours" class="schedule-cell" [ngStyle]="{'height': cellHeight + 'px'}"
+             style="background-color: transparent; position: relative; border: none">
+          <div style="position: absolute;top: -2px; color: gray">
+            {{hour}}
+          </div>
+        </div>
+      </div>
+      <div id="main-calender-body">
+        <div cdkDropList class="list-of-display-elements" *ngFor="let dayOfData of displayElements; let i = index"
+             (cdkDropListDropped)="onDrop($event)"
+             (cdkDropListSorted)="onDragStartedSameCol($event)"
+             (cdkDropListEntered)="onDragStartedCrossCol($event)"
+             [cdkDropListData]="dayOfData">
+          <div class="col-header-cell">
+            {{dateHeader(i)}}
+          </div>
+          <ng-container *ngFor="let data of dayOfData">
+            <!--Blank-->
+            <div *ngIf="data.isBlank; else classBlock" class="schedule-cell blank-cell" [cdkDragDisabled]="true"
+                 [ngStyle]="{'height': cellHeight*data.duration + 'px'}" cdkDrag>
+              <!--<div class="drag-placeholder" *cdkDragPlaceholder></div>-->
+            </div>
+            <ng-template #classBlock>
+              <div class="schedule-cell class-cell" cdkDrag [ngStyle]="{'height': cellHeight*data.duration + 'px'}">
+                <app-class-cell [data]="data" [isTeacher]=this.planningService.member.isTeacher></app-class-cell>
+              </div>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="h-spacer"></div>
+
+    </div>
+  </mat-card>
+
+<!--  <ng-container *ngIf="!this.planningService.readyToDisplay">-->
+<!--    <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
+<!--  </ng-container>-->
+</main>
