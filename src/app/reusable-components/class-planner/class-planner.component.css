@@ -3,7 +3,7 @@ main{
 }
 
 #main-card{
-  padding: 10px 0;
+
 }
 
 #relations{
@@ -11,7 +11,7 @@ main{
   flex-direction: row;
   overflow-x: auto;
   align-items: center;
-  margin:5px;
+  margin-bottom: 10px;
 }
 
 #main-calender {
@@ -45,13 +45,14 @@ main{
   /*border-radius: 4px;*/
   overflow: hidden;
   display: block;
-  width: 11.4vw;
+  width: 11.5vw;
   min-width: 150px;
 }
 
 .col-header-cell {
   display: flex;
   background-color: grey;
+  font-weight: lighter;
   justify-content: center;
   align-items: center;
   height: 1.7em;

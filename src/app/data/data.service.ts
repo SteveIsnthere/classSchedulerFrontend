@@ -114,4 +114,17 @@ export class DataService {
   getAllRelations() {
     return this.http.get<Relation[]>(this.url + "relation/all");
   }
+
+  markMember(memberNickName: string){
+    return this.http.get(this.url + "admin/marked_members/" + memberNickName);
+  }
+
+  getMarkedMembers(){
+    return this.http.get<string[]>(this.url + "admin/marked_members");
+  }
+
+  unMarkMember(memberNickName: string){
+    return this.http.delete(this.url + "admin/marked_members/" + memberNickName);
+  }
+
 }

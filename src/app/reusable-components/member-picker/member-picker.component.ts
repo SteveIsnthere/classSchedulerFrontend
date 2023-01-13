@@ -12,16 +12,18 @@ export class MemberPickerComponent {
   @Output() memberSelected = new EventEmitter<Member>();
   members: Member[] = [];
   markedMembersNames: string[] = [];
-
   displayingMembers: Member[] = [];
-
   displayTeachers: boolean = false;
-
   selectedMember: Member = dummyTeacher;
 
   constructor(public dataService: DataService) {
     this.dataService.getAllMembers().subscribe((data: Member[]) => {
       this.members = data;
+      dataService.getMarkedMembers().subscribe(
+        (markedMembers: string[]) => {
+          this.markedMembersNames = markedMembers;
+        }
+      )
       this.displayingMembers = data.filter(member => !member.isTeacher);
     })
   }
@@ -49,16 +51,34 @@ export class MemberPickerComponent {
   isMemberMarked(member: Member) {
     return this.markedMembersNames.includes(member.nickname);
   }
+
   markMember(member: Member) {
-    this.markedMembersNames.push(member.nickname);
+    this.dataService.markMember(member.nickname).subscribe(
+      () => {
+        this.markedMembersNames.push(member.nickname);
+      }
+    )
   }
+
   unmarkMember(member: Member) {
-    this.markedMembersNames = this.markedMembersNames.filter(name => name !== member.nickname);
+    this.dataService.unMarkMember(member.nickname).subscribe(
+      () => {
+        this.markedMembersNames = this.markedMembersNames.filter(name => name !== member.nickname);
+      }
+    );
   }
+
   markAllMembers() {
+    for (let member of this.displayingMembers.filter(member => !this.isMemberMarked(member))) {
+      this.dataService.markMember(member.nickname).subscribe();
+    }
     this.markedMembersNames = this.displayingMembers.map(member => member.nickname);
   }
+
   unmarkAllMembers() {
+    for (let member of this.markedMembersNames) {
+      this.dataService.unMarkMember(member).subscribe();
+    }
     this.markedMembersNames = [];
   }
 

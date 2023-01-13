@@ -28,10 +28,10 @@
     </mat-card-content>
     <mat-card-actions>
       <div id="options-bar">
-        <button mat-raised-button *ngIf="!displayTeachers" color="accent" (click)="toggleShowingTeachers()">Show
+        <button mat-raised-button *ngIf="!displayTeachers" color="primary" (click)="toggleShowingTeachers()">Show
           Teachers
         </button>
-        <button mat-raised-button *ngIf="displayTeachers" color="accent" (click)="toggleShowingTeachers()">Show
+        <button mat-raised-button *ngIf="displayTeachers" color="primary" (click)="toggleShowingTeachers()">Show
           Students
         </button>
 
@@ -44,8 +44,8 @@
 
         <div style="flex: 1"></div>
 
-        <button mat-raised-button color="accent" (click)="markAllMembers()">Mark all</button>
-        <button mat-raised-button color="primary" *ngIf="markedMembersNames.length > 0" (click)="unmarkAllMembers()">
+        <button mat-stroked-button color="accent" (click)="markAllMembers()">Mark all</button>
+        <button mat-stroked-button color="primary" *ngIf="markedMembersNames.length > 0" (click)="unmarkAllMembers()">
           Unmark all
         </button>
       </div>
