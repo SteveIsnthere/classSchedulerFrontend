@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {ClassPlan} from "./models/ClassPlan";
 import {Member} from "./models/Member";
 import {Relation} from "./models/Relation";
+import {Message} from "./models/Message";
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +114,18 @@ export class DataService {
 
   getAllRelations() {
     return this.http.get<Relation[]>(this.url + "relation/all");
+  }
+
+  postMessage(message: Message){
+    return this.http.post(this.url + "message/", message);
+  }
+
+  getMessages(nickname: string){
+    return this.http.get<Message[]>(this.url + "message/" + nickname);
+  }
+
+  deleteMessage(messageId: string){
+    return this.http.delete(this.url + "message/" + messageId);
   }
 
   markMember(memberNickName: string){

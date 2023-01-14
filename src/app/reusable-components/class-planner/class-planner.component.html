@@ -2,7 +2,8 @@
   <mat-card id="main-card" *ngIf="this.planningService.readyToDisplay">
     <!--relations-->
     <mat-card-header>
-      <mat-card-title style="margin-left: 10px">{{"Relations of " + planningService.member.nickname}}</mat-card-title>
+      <mat-card-title style="margin-left: 10px;">Relations of </mat-card-title>
+      <app-member-cell [member]="planningService.member" style="transform: translate(5px, -17px);"></app-member-cell>
     </mat-card-header>
 
     <mat-card-content>
@@ -43,7 +44,7 @@
           </div>
         </div>
 
-        <div class="h-spacer"></div>
+        <div class="h-spacer" style="min-width: 4px"></div>
 
         <!--hours marking-->
         <div class="list-of-display-elements" style="width: 18px; border: none; min-width: 15px;">

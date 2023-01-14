@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Relation Detail</h2>
+<mat-dialog-content>
+  <mat-card-header>
+    <mat-card-title>{{relation.courseName}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <div style="display: flex; align-items: center; justify-content: center">
+      <app-member-cell [member]="teacher"></app-member-cell>
+      <p style="transform: translate(0px, 13px);">-></p>
+<!--      <mat-icon>arrow_right_alt</mat-icon>-->
+      <app-member-cell [member]="student"></app-member-cell>
+    </div>
+    <br>
+    <span>Duration: {{relation.duration}}hr</span><br>
+    <span>{{relation.classPerWeek}} classes per week</span><br>
+    <span>Price: {{relation.price}}$</span><br>
+    <span>Teacher salary: {{relation.salary}}$</span><br>
+  </mat-card-content>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button>Edit</button>
+  <button mat-button mat-dialog-close>Delete</button>
+</mat-dialog-actions>

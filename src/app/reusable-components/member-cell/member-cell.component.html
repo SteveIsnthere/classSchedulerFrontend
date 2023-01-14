@@ -1,22 +1,14 @@
-<main>
-  <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>{{member.nickname}}</mat-card-title>
-      <mat-card-subtitle>{{member.name}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>ada</p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-    <mat-card-actions>
-      <div style="display: flex; justify-content: space-evenly; width: 100%">
-        <button mat-icon-button>
-          <mat-icon>info</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon>settings</mat-icon>
-        </button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
-</main>
+<button mat-stroked-button id="main-card" [matMenuTriggerFor]="menu">{{member.nickname}}
+  <mat-icon *ngIf="!member.isTeacher" class="example-tab-icon">boy</mat-icon>
+  <mat-icon *ngIf="member.isTeacher" class="example-tab-icon">settings_accessibility</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>mail</mat-icon>
+    <span>Send Message</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>info</mat-icon>
+    <span>Details</span>
+  </button>
+</mat-menu>

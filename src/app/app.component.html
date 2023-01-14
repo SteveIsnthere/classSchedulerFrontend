@@ -12,30 +12,10 @@
 
 <div class="content" role="main">
   <mat-toolbar color="primary">
-    <span>My web app, no shit</span>
+    <span>What ever text here</span>
     <div class="h-spacer"></div>
     <ng-container *ngIf="authService.isLoggedIn()">
-      <button [matMenuTriggerFor]="menu" mat-stroked-button>
-        <span>{{authService.self?.nickname}}</span>
-        <div style="width: 0.2em"></div>
-        <mat-icon *ngIf="authService.self?.isTeacher" fontIcon="settings_accessibility"></mat-icon>
-        <mat-icon *ngIf="!authService.self?.isTeacher" fontIcon="boy"></mat-icon>
-      </button>
-
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>mail</mat-icon>
-          <span>Messages</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-        <button mat-menu-item (click)="authService.logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
-      </mat-menu>
+      <app-self-actions></app-self-actions>
     </ng-container>
   </mat-toolbar>
   <router-outlet></router-outlet>

@@ -13,6 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 
+
 import {httpInterceptorProviders} from './helpers/http.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
@@ -21,8 +22,8 @@ import {ClassPlannerComponent} from './reusable-components/class-planner/class-p
 import {ClassCellComponent} from './reusable-components/class-cell/class-cell.component';
 import {RelationCellComponent} from './reusable-components/relation-cell/relation-cell.component';
 import {
-  RelationBottomSheetComponent
-} from './reusable-components/relation-cell/relation-bottom-sheet/relation-bottom-sheet.component';
+  RelationDetailDialogComponent
+} from './reusable-components/relation-cell/relation-detail-dialog/relation-detail-dialog.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MemberCellComponent} from './reusable-components/member-cell/member-cell.component';
@@ -39,22 +40,27 @@ import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
 import {
   ClassBottomSheetComponent
 } from './reusable-components/class-cell/class-bottom-sheet/class-bottom-sheet.component';
+import {SelfActionsComponent} from "./dashboard/self-actions/self-actions.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatOptionModule} from "@angular/material/core";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    ClassPlannerComponent,
-    ClassCellComponent,
-    RelationCellComponent,
-    MemberCellComponent,
-    MemberPickerComponent,
-    MessagesComponent,
-    AdminClassPlannerComponent,
-    RelationBottomSheetComponent,
-    ClassBottomSheetComponent
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        DashboardComponent,
+        ClassPlannerComponent,
+        ClassCellComponent,
+        RelationCellComponent,
+        MemberCellComponent,
+        MemberPickerComponent,
+        MessagesComponent,
+        AdminClassPlannerComponent,
+        RelationDetailDialogComponent,
+        ClassBottomSheetComponent,
+        SelfActionsComponent
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -78,7 +84,10 @@ import {
     MatBadgeModule,
     MatProgressBarModule,
     MatListModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatDialogModule,
+    MatButtonToggleModule,
+    MatOptionModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

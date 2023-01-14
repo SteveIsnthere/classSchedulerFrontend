@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {dummyRelation, Relation} from "../../data/models/Relation";
-import {RelationBottomSheetComponent} from "./relation-bottom-sheet/relation-bottom-sheet.component";
-import {MatBottomSheet,MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {RelationDetailDialogComponent} from "./relation-detail-dialog/relation-detail-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-relation-cell',
@@ -12,11 +12,11 @@ export class RelationCellComponent {
   @Input() relation: Relation = dummyRelation();
   @Input() isTeacher: boolean = true;
 
-  constructor(private bottomSheet: MatBottomSheet) {
+  constructor(private dialog: MatDialog) {
   }
 
   showBottomSheet() {
-    this.bottomSheet.open(RelationBottomSheetComponent, {
+    this.dialog.open(RelationDetailDialogComponent, {
       data: this.relation
     });
   }

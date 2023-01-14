@@ -8,6 +8,7 @@ import {AuthService} from "./data/auth.service";
 })
 export class AppComponent implements OnInit {
   title = 'classSchedulerFrontend';
+
   constructor(public authService: AuthService) {
     if (!authService.isLoggedIn()) {
       authService.login();

@@ -329,11 +329,15 @@ export class PlanningServiceService {
 
   addClassFromRelation(displayElementsList: DisplayElement[], newIndex: number) {
     this.removeBlankDisplayElementAfterClassMovedIn(displayElementsList, newIndex);
+    if (newIndex > displayElementsList.length - 1) {
+      newIndex = displayElementsList.length - 1;
+    }
     let c = displayElementsList[newIndex];
 
     //get time past before the start of the class
     let timePrecision_Day = this.datesInWeek[this.displayData.indexOf(displayElementsList)];
     let hoursPast = 0;
+
     for (let i = 0; i < newIndex; i++) {
       hoursPast += displayElementsList[i].duration;
     }
