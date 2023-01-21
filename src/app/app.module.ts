@@ -44,6 +44,7 @@ import {SelfActionsComponent} from "./dashboard/self-actions/self-actions.compon
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatOptionModule} from "@angular/material/core";
+import { ForumComponent } from './forum/forum.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import {MatOptionModule} from "@angular/material/core";
         AdminClassPlannerComponent,
         RelationDetailDialogComponent,
         ClassBottomSheetComponent,
-        SelfActionsComponent
+        SelfActionsComponent,
+        ForumComponent
     ],
   imports: [
     BrowserModule,
