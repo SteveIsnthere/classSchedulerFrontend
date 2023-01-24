@@ -1,4 +1,4 @@
-export interface PostComment{
+export interface PostComment {
   authorNickName: string;
   content: string;
   likes: number;

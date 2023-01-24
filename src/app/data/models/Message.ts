@@ -1,4 +1,4 @@
-export interface Message{
+export interface Message {
   _id: string;
   senderNickName: string;
   receiverNickName: string;

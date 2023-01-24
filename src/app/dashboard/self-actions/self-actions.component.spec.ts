@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SelfActionsComponent } from './self-actions.component';
+import {SelfActionsComponent} from './self-actions.component';
 
 describe('SelfActionsComponent', () => {
   let component: SelfActionsComponent;
@@ -8,9 +8,9 @@ describe('SelfActionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelfActionsComponent ]
+      declarations: [SelfActionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SelfActionsComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClassBottomSheetComponent } from './class-bottom-sheet.component';
+import {ClassBottomSheetComponent} from './class-bottom-sheet.component';
 
 describe('ClassBottomSheetComponent', () => {
   let component: ClassBottomSheetComponent;
@@ -8,9 +8,9 @@ describe('ClassBottomSheetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassBottomSheetComponent ]
+      declarations: [ClassBottomSheetComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ClassBottomSheetComponent);
     component = fixture.componentInstance;

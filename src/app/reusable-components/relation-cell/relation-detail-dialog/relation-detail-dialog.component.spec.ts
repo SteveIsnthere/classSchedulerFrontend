@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RelationDetailDialogComponent } from './relation-detail-dialog.component';
+import {RelationDetailDialogComponent} from './relation-detail-dialog.component';
 
 describe('RelationBottomSheetComponent', () => {
   let component: RelationDetailDialogComponent;
@@ -8,9 +8,9 @@ describe('RelationBottomSheetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RelationDetailDialogComponent ]
+      declarations: [RelationDetailDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(RelationDetailDialogComponent);
     component = fixture.componentInstance;

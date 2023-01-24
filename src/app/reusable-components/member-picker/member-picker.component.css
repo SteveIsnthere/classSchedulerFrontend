@@ -1,7 +1,8 @@
-main{
+main {
   padding: 10px;
 }
-#options-bar{
+
+#options-bar {
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -15,16 +16,18 @@ main{
 #members-list::-webkit-scrollbar {
   display: none;
 }
-#members-list{
+
+#members-list {
   display: flex;
   gap: 5px;
   flex-direction: row;
 }
-.not-selected{
+
+.not-selected {
   flex-wrap: wrap;
 }
 
-.selected{
+.selected {
   flex-wrap: nowrap;
   overflow-x: auto;
 }
@@ -34,10 +37,10 @@ main{
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  background-color: rgba(64,80,181,0.55);
+  background-color: rgba(64, 80, 181, 0.55);
 }
 
-.selected-card{
+.selected-card {
   color: black;
   background-color: #caffdc;
 }

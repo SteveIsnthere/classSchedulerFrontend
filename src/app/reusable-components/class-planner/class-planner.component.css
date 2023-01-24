@@ -1,12 +1,12 @@
-main{
-  margin:10px;
+main {
+  margin: 10px;
 }
 
-#main-card{
+#main-card {
 
 }
 
-#relations{
+#relations {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -25,11 +25,11 @@ main{
   overflow: auto;
 }
 
-#classes-to-add{
+#classes-to-add {
   overflow-y: auto;
 }
 
-#date-time-selector{
+#date-time-selector {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

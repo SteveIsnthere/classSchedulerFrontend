@@ -6,14 +6,14 @@
       <mat-card-title *ngIf="displayTeachers">Teachers</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div id="members-list"
-           [ngClass]="{
+      <div [ngClass]="{
        'not-selected':!isMemberSelected(),
-       'selected':isMemberSelected()}">
+       'selected':isMemberSelected()}"
+           id="members-list">
         <ng-container *ngFor="let member of displayingMembers">
-          <mat-card matBadge="!" matBadgeColor="warn" [matBadgeHidden]="!isMemberMarked(member)" class="example-card"
-                    [ngClass]="{'selected-card' : member === selectedMember}"
-                    (click)="selectMember(member)">
+          <mat-card (click)="selectMember(member)" [matBadgeHidden]="!isMemberMarked(member)" [ngClass]="{'selected-card' : member === selectedMember}" class="example-card"
+                    matBadge="!"
+                    matBadgeColor="warn">
             <mat-card-header>
               <mat-card-title>{{member.nickname}}</mat-card-title>
             </mat-card-header>
@@ -28,24 +28,24 @@
     </mat-card-content>
     <mat-card-actions>
       <div id="options-bar">
-        <button mat-raised-button *ngIf="!displayTeachers" color="primary" (click)="toggleShowingTeachers()">Show
+        <button (click)="toggleShowingTeachers()" *ngIf="!displayTeachers" color="primary" mat-raised-button>Show
           Teachers
         </button>
-        <button mat-raised-button *ngIf="displayTeachers" color="primary" (click)="toggleShowingTeachers()">Show
+        <button (click)="toggleShowingTeachers()" *ngIf="displayTeachers" color="primary" mat-raised-button>Show
           Students
         </button>
 
         <ng-container *ngIf="isMemberMarked(selectedMember) && isMemberSelected()">
-          <button mat-raised-button color="primary" (click)="unmarkMember(selectedMember)">Unmark member</button>
+          <button (click)="unmarkMember(selectedMember)" color="primary" mat-raised-button>Unmark member</button>
         </ng-container>
         <ng-container *ngIf="!isMemberMarked(selectedMember) && isMemberSelected()">
-          <button mat-raised-button color="accent" (click)="markMember(selectedMember)">Mark member</button>
+          <button (click)="markMember(selectedMember)" color="accent" mat-raised-button>Mark member</button>
         </ng-container>
 
         <div style="flex: 1"></div>
 
-        <button mat-stroked-button color="accent" (click)="markAllMembers()">Mark all</button>
-        <button mat-stroked-button color="primary" *ngIf="markedMembersNames.length > 0" (click)="unmarkAllMembers()">
+        <button (click)="markAllMembers()" color="accent" mat-stroked-button>Mark all</button>
+        <button (click)="unmarkAllMembers()" *ngIf="markedMembersNames.length > 0" color="primary" mat-stroked-button>
           Unmark all
         </button>
       </div>

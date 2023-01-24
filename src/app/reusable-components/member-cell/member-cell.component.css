@@ -1,8 +1,8 @@
-#main-card{
+#main-card {
   margin: 15px 5px 2px;
   color: white;
   border-radius: 10px;
   cursor: pointer;
-  background-color: rgba(64,80,181,0.75);
+  background-color: rgba(64, 80, 181, 0.75);
   font-weight: bold;
 }

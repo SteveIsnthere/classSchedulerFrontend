@@ -1,5 +1,5 @@
 <main>
-  <mat-card class="example-card" (click)="showBottomSheet()">
+  <mat-card (click)="showBottomSheet()" class="example-card">
     <mat-card-header>
       <mat-card-title>{{relation.courseName}}</mat-card-title>
       <mat-card-subtitle *ngIf="this.isTeacher; else studentBlock">{{"With " + relation.student}}</mat-card-subtitle>

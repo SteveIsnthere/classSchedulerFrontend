@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MemberPickerComponent } from './member-picker.component';
+import {MemberPickerComponent} from './member-picker.component';
 
 describe('MemberPickerComponent', () => {
   let component: MemberPickerComponent;
@@ -8,9 +8,9 @@ describe('MemberPickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MemberPickerComponent ]
+      declarations: [MemberPickerComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MemberPickerComponent);
     component = fixture.componentInstance;

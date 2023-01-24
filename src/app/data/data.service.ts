@@ -64,7 +64,7 @@ export class DataService {
     return this.http.get<Course>(this.url + "course/" + courseName);
   }
 
-  createPlan(p:ClassPlan){
+  createPlan(p: ClassPlan) {
     return this.http.post(this.url + "plan/", p);
   }
 
@@ -116,27 +116,27 @@ export class DataService {
     return this.http.get<Relation[]>(this.url + "relation/all");
   }
 
-  postMessage(message: Message){
+  postMessage(message: Message) {
     return this.http.post(this.url + "message/", message);
   }
 
-  getMessages(nickname: string){
+  getMessages(nickname: string) {
     return this.http.get<Message[]>(this.url + "message/" + nickname);
   }
 
-  deleteMessage(messageId: string){
+  deleteMessage(messageId: string) {
     return this.http.delete(this.url + "message/" + messageId);
   }
 
-  markMember(memberNickName: string){
+  markMember(memberNickName: string) {
     return this.http.get(this.url + "admin/marked_members/" + memberNickName);
   }
 
-  getMarkedMembers(){
+  getMarkedMembers() {
     return this.http.get<string[]>(this.url + "admin/marked_members");
   }
 
-  unMarkMember(memberNickName: string){
+  unMarkMember(memberNickName: string) {
     return this.http.delete(this.url + "admin/marked_members/" + memberNickName);
   }
 

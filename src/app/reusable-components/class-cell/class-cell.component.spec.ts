@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClassCellComponent } from './class-cell.component';
+import {ClassCellComponent} from './class-cell.component';
 
 describe('ClassCellComponent', () => {
   let component: ClassCellComponent;
@@ -8,9 +8,9 @@ describe('ClassCellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassCellComponent ]
+      declarations: [ClassCellComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ClassCellComponent);
     component = fixture.componentInstance;

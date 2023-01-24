@@ -1,11 +1,13 @@
-main{
+main {
   border-radius: 5px;
 
 }
-#class-card{
+
+#class-card {
   width: 100%;
   height: 100%;
 }
-#settings-btn{
+
+#settings-btn {
   float: right;
 }

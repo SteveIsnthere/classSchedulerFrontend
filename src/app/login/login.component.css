@@ -1,9 +1,10 @@
-main{
+main {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
+
 #login_wrapper {
   margin-top: 10px;
   display: flex;

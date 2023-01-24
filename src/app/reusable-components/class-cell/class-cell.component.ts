@@ -14,6 +14,7 @@ export class ClassCellComponent {
 
   constructor(private bottomSheet: MatBottomSheet) {
   }
+
   showBottomSheet() {
     this.bottomSheet.open(ClassBottomSheetComponent, {
       data: this.data

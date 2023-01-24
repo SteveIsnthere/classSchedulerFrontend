@@ -44,25 +44,25 @@ import {SelfActionsComponent} from "./dashboard/self-actions/self-actions.compon
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatOptionModule} from "@angular/material/core";
-import { ForumComponent } from './forum/forum.component';
+import {ForumComponent} from './forum/forum.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        DashboardComponent,
-        ClassPlannerComponent,
-        ClassCellComponent,
-        RelationCellComponent,
-        MemberCellComponent,
-        MemberPickerComponent,
-        MessagesComponent,
-        AdminClassPlannerComponent,
-        RelationDetailDialogComponent,
-        ClassBottomSheetComponent,
-        SelfActionsComponent,
-        ForumComponent
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    ClassPlannerComponent,
+    ClassCellComponent,
+    RelationCellComponent,
+    MemberCellComponent,
+    MemberPickerComponent,
+    MessagesComponent,
+    AdminClassPlannerComponent,
+    RelationDetailDialogComponent,
+    ClassBottomSheetComponent,
+    SelfActionsComponent,
+    ForumComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

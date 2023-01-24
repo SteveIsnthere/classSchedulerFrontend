@@ -9,7 +9,7 @@ export interface Relation {
   duration: number;
 }
 
-export function dummyRelation(){
+export function dummyRelation() {
   return {
     _id: '',
     courseName: '',

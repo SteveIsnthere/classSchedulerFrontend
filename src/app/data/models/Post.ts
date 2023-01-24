@@ -1,6 +1,6 @@
 import {dummyComment, PostComment} from "./PostComment";
 
-export interface Post{
+export interface Post {
   title: string;
   likes: number;
   imageLink: string;

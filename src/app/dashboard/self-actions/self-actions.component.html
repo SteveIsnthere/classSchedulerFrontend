@@ -1,5 +1,5 @@
-<button [matMenuTriggerFor]="menu" mat-stroked-button matBadge="{{messageService.numberOfMessages()}}"
-        [matBadgeHidden]="shouldHideBadge()" matBadgeColor="warn">
+<button [matBadgeHidden]="shouldHideBadge()" [matMenuTriggerFor]="menu" mat-stroked-button
+        matBadge="{{messageService.numberOfMessages()}}" matBadgeColor="warn">
   <span>{{authService.self?.nickname}}</span>
   <div style="width: 0.2em"></div>
   <mat-icon *ngIf="authService.self?.isTeacher" fontIcon="settings_accessibility"></mat-icon>
@@ -7,13 +7,13 @@
 </button>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="openDialog()">
-    <mat-icon matBadge="{{messageService.numberOfMessages()}}" [matBadgeHidden]="shouldHideBadge()"
+  <button (click)="openDialog()" mat-menu-item>
+    <mat-icon [matBadgeHidden]="shouldHideBadge()" matBadge="{{messageService.numberOfMessages()}}"
               matBadgeColor="warn">mail
     </mat-icon>
     <span>Messages</span>
   </button>
-  <button mat-menu-item (click)="authService.logout()">
+  <button (click)="authService.logout()" mat-menu-item>
     <mat-icon>logout</mat-icon>
     <span>Logout</span>
   </button>

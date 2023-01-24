@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest,
   HTTP_INTERCEPTORS,
-  HttpHeaders, HttpErrorResponse
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpRequest
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {CookieService} from "ngx-cookie-service";

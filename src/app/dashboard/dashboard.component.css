@@ -1,8 +1,9 @@
-main{
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .example-tab-icon {
   margin-right: 8px;
 }

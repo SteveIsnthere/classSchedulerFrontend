@@ -1,4 +1,4 @@
-<button mat-stroked-button id="main-card" [matMenuTriggerFor]="menu">{{member.nickname}}
+<button [matMenuTriggerFor]="menu" id="main-card" mat-stroked-button>{{member.nickname}}
   <mat-icon *ngIf="!member.isTeacher" class="example-tab-icon">boy</mat-icon>
   <mat-icon *ngIf="member.isTeacher" class="example-tab-icon">settings_accessibility</mat-icon>
 </button>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {CdkDragDrop, CdkDragEnter, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {PlanningServiceService} from "./planning-service.service";
@@ -14,6 +14,7 @@ export class ClassPlannerComponent {
   hours: number[] = []
   cellHeight: number = 80;
   draggingFromRelation: boolean = false;
+
   constructor(public planningService: PlanningServiceService) {
     this.displayElements = this.planningService.displayData;
     for (let h = this.planningService.openingTime; h < this.planningService.closingTime; h++) {
@@ -100,7 +101,7 @@ export class ClassPlannerComponent {
     return weekDay + ' ' + day;
   }
 
-  getMonthAndYear(){
+  getMonthAndYear() {
     let monthIndex = this.planningService.datesInWeek[0].getMonth()
     let year = this.planningService.datesInWeek[0].getFullYear()
     let month = ''

@@ -10,7 +10,8 @@ import {PlanningServiceService} from "../../class-planner/planning-service.servi
   styleUrls: ['./class-bottom-sheet.component.css']
 })
 export class ClassBottomSheetComponent {
-  _class: Class|undefined;
+  _class: Class | undefined;
+
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: DisplayElement, private planningService: PlanningServiceService) {
     this._class = this.planningService.classes.find(c => c._id === data._id);
   }

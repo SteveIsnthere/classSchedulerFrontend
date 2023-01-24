@@ -1,5 +1,4 @@
 import {Course} from "./Course";
-import {ClassPlan} from "./ClassPlan";
 import {TimePeriod} from "./TimePeriod";
 
 export interface Member {

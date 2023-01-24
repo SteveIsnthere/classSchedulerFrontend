@@ -67,7 +67,7 @@ export class PlanningServiceService {
     });
   }
 
-  init(member: Member){
+  init(member: Member) {
     this.member = member;
     this.initDisplayData();
   }
@@ -106,7 +106,7 @@ export class PlanningServiceService {
       timePassedBeforeClass += this.displayData[dayOfWeek][cursorPosition].duration;
       cursorPosition++;
     }
-    if (timePassedBeforeClass > this.closingTime-this.openingTime) {
+    if (timePassedBeforeClass > this.closingTime - this.openingTime) {
       console.error("class start time is out of range after 1st check, removed class: " + newClass.info.courseName + " " + newClass.startTime);
       this.dataService.deleteClass(newClass._id).subscribe();
     }
