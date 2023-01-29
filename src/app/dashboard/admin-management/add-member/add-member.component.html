@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>New Member</h2>
+<mat-dialog-content style="height: 80vh;">
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]=isEditable>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Basic Info</ng-template>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="nameCtrl" placeholder="John Smith" required>
+            <mat-hint>First name, Last name</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Nick-name</mat-label>
+            <input matInput formControlName="nameCtrl" placeholder="Johnny923" required>
+            <mat-hint>Visible to everyone</mat-hint>
+          </mat-form-field>
+        </p>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]=isEditable>
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Contact Infos</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
