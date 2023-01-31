@@ -1,17 +1,15 @@
-<main>
+<main *ngIf="relatedMember != null">
   <mat-card (click)="showBottomSheet()" class="example-card">
     <mat-card-header>
       <mat-card-title>{{relation.courseName}}</mat-card-title>
-      <mat-card-subtitle *ngIf="this.isTeacher; else studentBlock">{{"With " + relation.student}}</mat-card-subtitle>
-      <ng-template #studentBlock>
-        <mat-card-subtitle>{{"With " + relation.teacher}}</mat-card-subtitle>
-      </ng-template>
+      <mat-card-subtitle>
+        <app-member-cell (click)="preventShowDetail()" [member]="relatedMember"></app-member-cell>
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <mat-divider></mat-divider>
       <div style="height: 5px;"></div>
-      <span>Duration: {{relation.duration}}hr</span><br>
-      <span>{{relation.classPerWeek}} classes per week</span>
+      <span>Duration: {{relation.duration}} Hours</span><br>
+      <span>{{relation.classPerWeek}} per week</span>
     </mat-card-content>
   </mat-card>
 </main>

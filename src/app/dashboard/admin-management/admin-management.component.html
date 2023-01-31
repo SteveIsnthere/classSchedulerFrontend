@@ -1,3 +1,13 @@
 <main>
-  <button mat-raised-button color="primary" (click)="openAddMemberDialog()">Add a member</button>
+  <mat-card id="quick-actions">
+    <mat-card-header>
+      <mat-card-title>
+        Quick Actions
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions style="gap: 10px">
+      <button mat-raised-button color="primary" (click)="openAddMemberDialog()">Add a member</button>
+      <button mat-raised-button color="warn">Do other stuff</button>
+    </mat-card-actions>
+  </mat-card>
 </main>

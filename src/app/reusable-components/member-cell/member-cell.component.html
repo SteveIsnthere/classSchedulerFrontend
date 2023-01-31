@@ -1,3 +1,4 @@
+<main>
 <button [matMenuTriggerFor]="menu" id="main-card" mat-stroked-button>{{member.nickname}}
   <mat-icon *ngIf="!member.isTeacher" class="example-tab-icon">boy</mat-icon>
   <mat-icon *ngIf="member.isTeacher" class="example-tab-icon">settings_accessibility</mat-icon>
@@ -8,7 +9,12 @@
     <span>Send Message</span>
   </button>
   <button mat-menu-item>
+    <mat-icon>calendar_month</mat-icon>
+    <span>Show Schedule</span>
+  </button>
+  <button mat-menu-item>
     <mat-icon>info</mat-icon>
     <span>Details</span>
   </button>
 </mat-menu>
+</main>
