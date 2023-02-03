@@ -4,17 +4,17 @@
   <mat-icon *ngIf="member.isTeacher" class="example-tab-icon">settings_accessibility</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>mail</mat-icon>
-    <span>Send Message</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>calendar_month</mat-icon>
-    <span>Show Schedule</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>info</mat-icon>
-    <span>Details</span>
-  </button>
+    <button mat-menu-item (click)="showMessageView()">
+      <mat-icon>mail</mat-icon>
+      <span>Send Message</span>
+    </button>
+    <button mat-menu-item (click)="showScheduleView()">
+      <mat-icon>calendar_month</mat-icon>
+      <span>Show Schedule</span>
+    </button>
+    <button mat-menu-item (click)="showDetailsView()">
+      <mat-icon>info</mat-icon>
+      <span>Details</span>
+    </button>
 </mat-menu>
 </main>

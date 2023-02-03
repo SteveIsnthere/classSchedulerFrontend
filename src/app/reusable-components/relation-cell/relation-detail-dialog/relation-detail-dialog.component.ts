@@ -14,8 +14,6 @@ import {PlanningServiceService} from "../../class-planner/planning-service.servi
 })
 export class RelationDetailDialogComponent implements OnInit {
   relation: Relation;
-  teacher: Member = dummyTeacher;
-  student: Member = dummyStudent;
   editMode = false;
   formGroup = this._formBuilder.group({
     nameCtrl: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -25,20 +23,11 @@ export class RelationDetailDialogComponent implements OnInit {
     salaryCtrl: ['', [Validators.required, Validators.min(10), Validators.max(2000)]],
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Relation, private _formBuilder: FormBuilder, private dataService: DataService, private planningService: PlanningServiceService){
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Relation, private _formBuilder: FormBuilder, private dataService: DataService, private planningService: PlanningServiceService) {
     this.relation = this.data
   }
+
   ngOnInit(): void {
-    this.dataService.getMember(this.relation.teacher).subscribe(
-      (teacher: Member) => {
-        this.teacher = teacher;
-      }
-    );
-    this.dataService.getMember(this.relation.student).subscribe(
-      (student: Member) => {
-        this.student = student;
-      }
-    );
   }
 
   updatePlanningService() {

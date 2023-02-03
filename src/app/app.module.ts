@@ -48,6 +48,9 @@ import {ForumComponent} from './forum/forum.component';
 import { AddMemberComponent } from './dashboard/admin-management/add-member/add-member.component';
 import { AdminManagementComponent } from './dashboard/admin-management/admin-management.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { DetailViewComponent } from './reusable-components/member-cell/detail-view/detail-view.component';
+import { MessageViewComponent } from './reusable-components/member-cell/message-view/message-view.component';
+import { ScheduleViewComponent } from './reusable-components/member-cell/schedule-view/schedule-view.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import {MatStepperModule} from "@angular/material/stepper";
     SelfActionsComponent,
     ForumComponent,
     AddMemberComponent,
-    AdminManagementComponent
+    AdminManagementComponent,
+    DetailViewComponent,
+    MessageViewComponent,
+    ScheduleViewComponent
   ],
   imports: [
     BrowserModule,

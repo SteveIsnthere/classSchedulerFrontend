@@ -1,22 +1,22 @@
-<h2 mat-dialog-title>Relation Detail</h2>
+<h2 mat-dialog-title>{{relation.courseName}}</h2>
 <mat-dialog-content>
   <ng-container *ngIf="!editMode; else editView">
     <mat-card-header>
-      <mat-card-title>{{relation.courseName}}</mat-card-title>
+      <mat-card-title>
+        <span>{{relation.teacher}}</span>
+        <span> -> </span>
+        <span>{{relation.student}}</span>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
       <div style="display: flex; align-items: center; justify-content: center">
-        <app-member-cell [member]="teacher"></app-member-cell>
-        <p style="transform: translate(0px, 13px);">-></p>
-        <!--      <mat-icon>arrow_right_alt</mat-icon>-->
-        <app-member-cell [member]="student"></app-member-cell>
       </div>
       <br>
-      <span>Duration: {{relation.duration}}hr</span><br>
-      <span>{{relation.classPerWeek}} classes per week</span><br>
+      <strong>Duration: {{relation.duration}}hr</strong><br>
+      <strong>{{relation.classPerWeek}} Class Per Week</strong><br>
       <span>Price: {{relation.price}}$</span><br>
-      <span>Teacher salary: {{relation.salary}}$</span><br>
+      <span>Teacher Salary: {{relation.salary}}$</span><br>
     </mat-card-content>
   </ng-container>
 
