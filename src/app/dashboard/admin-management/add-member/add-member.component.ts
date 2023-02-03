@@ -17,6 +17,7 @@ export class AddMemberComponent {
   password: string = '';
   isTeacher: boolean = false;
   isEditable = false;
+  submitted = false;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService) {}
   firstFormGroup = this._formBuilder.group({
@@ -52,7 +53,11 @@ export class AddMemberComponent {
       unableTimes: [],
       preferredTimes: []
     }
-    this.dataService.createMember(member);
+    this.dataService.createMember(member).subscribe(
+      (data) => {
+        this.submitted = true;
+      }
+    );
   }
 
 

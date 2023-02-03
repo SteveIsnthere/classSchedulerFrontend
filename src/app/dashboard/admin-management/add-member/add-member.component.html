@@ -54,11 +54,19 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+      <ng-container *ngIf="!submitted; else afterSubmitted">
+        <p>Name: {{name}}</p>
+        <p>Nick-name: {{nickname}}</p>
+        <p>Password: {{password}}</p>
+        <p>Phone: {{phone}}</p>
+        <p>Email: {{email}}</p>
+        <div>
+          <button mat-raised-button (click)="submit()">Submit</button>
+        </div>
+      </ng-container>
+      <ng-template #afterSubmitted>
+        <p>Submitted!</p>
+      </ng-template>
     </mat-step>
   </mat-stepper>
 </mat-dialog-content>

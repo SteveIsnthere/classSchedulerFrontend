@@ -1,26 +1,82 @@
 <h2 mat-dialog-title>Relation Detail</h2>
 <mat-dialog-content>
-  <mat-card-header>
-    <mat-card-title>{{relation.courseName}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-divider></mat-divider>
+  <ng-container *ngIf="!editMode; else editView">
+    <mat-card-header>
+      <mat-card-title>{{relation.courseName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <div style="display: flex; align-items: center; justify-content: center">
+        <app-member-cell [member]="teacher"></app-member-cell>
+        <p style="transform: translate(0px, 13px);">-></p>
+        <!--      <mat-icon>arrow_right_alt</mat-icon>-->
+        <app-member-cell [member]="student"></app-member-cell>
+      </div>
+      <br>
+      <span>Duration: {{relation.duration}}hr</span><br>
+      <span>{{relation.classPerWeek}} classes per week</span><br>
+      <span>Price: {{relation.price}}$</span><br>
+      <span>Teacher salary: {{relation.salary}}$</span><br>
+    </mat-card-content>
+  </ng-container>
 
-    <div style="display: flex; align-items: center; justify-content: center">
-      <app-member-cell [member]="teacher"></app-member-cell>
-      <p style="transform: translate(0px, 13px);">-></p>
-      <!--      <mat-icon>arrow_right_alt</mat-icon>-->
-      <app-member-cell [member]="student"></app-member-cell>
-    </div>
-    <br>
-    <span>Duration: {{relation.duration}}hr</span><br>
-    <span>{{relation.classPerWeek}} classes per week</span><br>
-    <span>Price: {{relation.price}}$</span><br>
-    <span>Teacher salary: {{relation.salary}}$</span><br>
-  </mat-card-content>
+  <ng-template #editView>
+    <form [formGroup]="formGroup">
+      <ng-template matStepLabel>Basic Info</ng-template>
+      <p style="margin-top: 10px">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="nameCtrl" [(ngModel)]="this.relation.courseName" placeholder="Math" required>
+          <mat-hint>Name of relation</mat-hint>
+        </mat-form-field>
+      </p>
 
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Class Per Week</mat-label>
+          <input type="number" matInput [(ngModel)]="this.relation.classPerWeek" placeholder="Slab"
+                 formControlName="classPerWeekCtrl">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Duration</mat-label>
+          <input type="number" matInput [(ngModel)]="this.relation.duration" placeholder="Slab"
+                 formControlName="durationCtrl">
+          <mat-hint>In hours</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput [(ngModel)]="this.relation.price" placeholder="Slab"
+                 formControlName="priceCtrl">
+          <mat-hint>In dollars</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Salary</mat-label>
+          <input type="number" matInput [(ngModel)]="this.relation.salary" placeholder="Slab"
+                 formControlName="salaryCtrl">
+          <mat-hint>In dollars</mat-hint>
+        </mat-form-field>
+      </p>
+    </form>
+  </ng-template>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button>Edit</button>
-  <button mat-button mat-dialog-close>Delete</button>
+  <ng-container *ngIf="!editMode; else editOptions">
+    <button mat-button (click)="toggleEditMode()">Edit</button>
+    <button mat-button color="warn" (click)="deleteRelation()" mat-dialog-close="">Delete</button>
+  </ng-container>
+
+  <ng-template #editOptions>
+    <button mat-raised-button color="primary" (click)="updateRelation()" [disabled]="this.formGroup.invalid"
+            mat-dialog-close="">Save
+    </button>
+  </ng-template>
 </mat-dialog-actions>
