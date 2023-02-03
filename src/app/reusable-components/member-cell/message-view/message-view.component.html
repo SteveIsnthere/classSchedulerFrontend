@@ -1,1 +1,14 @@
-<p>{{receiverNickName}}</p>
+<h2 mat-dialog-title>To: {{receiverNickName}}</h2>
+
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Your Message</mat-label>
+    <textarea matInput [ngModel]="message" placeholder="Ex. Hi {{receiverNickName}}..."></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close = ''>Cancel</button>
+  <button mat-button (click)="send()" mat-dialog-close = '' cdkFocusInitial>Send</button>
+</mat-dialog-actions>
